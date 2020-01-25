@@ -10,7 +10,7 @@ body{
 
 #header{
     padding: 20px;
-    background: gold;
+    background: darkorange;
 
 }
 
@@ -20,6 +20,6 @@ body{
 }
 
 #footer{
-    background: green;
+    background: seagreen;
     padding: 20px;
 }

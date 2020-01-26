@@ -1,8 +1,8 @@
 <?php
-
-/*
-  Categorie controller
- */
+#Class name : Service
+#Purpose : Service controller
+#Author : mwabo
+#email : mwabo@exsofth.com
 
 class Service extends Controller {
 

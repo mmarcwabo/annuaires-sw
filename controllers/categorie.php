@@ -1,8 +1,8 @@
 <?php
-
-/*
-  Categorie controller
- */
+#Class name : Categorie
+#Purpose : Categorie controller
+#Author : mwabo
+#email : mwabo@exsofth.com
 
 class Categorie extends Controller {
 

@@ -10,11 +10,14 @@ class Categorie extends Controller {
         parent::__construct();
         //Model instantiation
         //JS files for this controller
-        //$this->view->js = array("scripts/js/user.js");
+        
     }
 
     function index() {
         $this->view->title = "Categorie";
+        $this->view->js = array("scripts/js/categorie.js");
+        //Display categories' list before render it on the page
+        $this->showCategorieList();
         $this->view->render("categorie/index");
     }
 
@@ -43,8 +46,7 @@ class Categorie extends Controller {
     public function edit($id) {
 
         $this->view->title = "Modifier categorie";
-        $this->view->categorie = $this->model->categorieSingleList($id);
-
+        $this->view->categorie = $this->model->showSingleList($id);
         $this->view->render('categorie/edit');
     }
 
@@ -82,8 +84,9 @@ class Categorie extends Controller {
     }
 
     public function showCategorieList() {
-        $model = new Categorie_Model();
-        print_r($model->showUserList());
+        //Showing all the categories
+        //Sending list of categories on the view
+        $this->view->listOfCategorie = $this->model->showCategorieList();
     }
 
     public function showSingleList($id) {

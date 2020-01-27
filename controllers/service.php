@@ -1,8 +1,8 @@
 <?php
-#Class name : Service
-#Purpose : Service controller
-#Author : mwabo
-#email : mwabo@exsofth.com
+
+/*
+  Categorie controller
+ */
 
 class Service extends Controller {
 
@@ -25,8 +25,14 @@ class Service extends Controller {
         //$data = null;
         $form = new Form();
         try {
-            $form->post('titre')
-                ->post('description');
+            $form->post('denomination')
+                ->post('telephone')
+                ->post('adressemail')
+                ->post('adresse')
+                ->post('horairedisponibilite')
+                ->post('ville')
+                ->post('details')
+                ->post('categorie');
             $form->submit();
             //echo "the form passed";
             $data = $form->fetch();
@@ -34,10 +40,9 @@ class Service extends Controller {
             echo $exc->getMessage();
         }
         //Getting the user id here
-        //$data['coordonnees_idcordonnees'] = 1;
         //Real insert here    
         $this->model->create($data);
-        $this->view->render("categorie/index");
+        $this->view->render("service/index");
     }
 
     public function edit($id) {
@@ -45,7 +50,7 @@ class Service extends Controller {
         $this->view->title = "Modifier categorie";
         $this->view->categorie = $this->model->categorieSingleList($id);
 
-        $this->view->render('categorie/edit');
+        $this->view->render('service/edit');
     }
 
     public function editSave($id) {
@@ -56,9 +61,16 @@ class Service extends Controller {
         //$data = null;
         $form = new Form();
         try {
-            $form->post('titre')
-                ->post('description');
+            $form->ost('denomination')
+                ->post('telephone')
+                ->post('adressemail')
+                ->post('adresse')
+                ->post('horairedisponibilite')
+                ->post('ville')
+                ->post('details')
+                ->post('categorie');
             $form->submit();
+            //echoing something for debug purpose
             //echo "the form passed";
             $data = $form->fetch();
         } catch (Exception $exc) {
@@ -70,7 +82,7 @@ class Service extends Controller {
         // @TODO: Do your error checking!
 
         $this->model->editSave($data);
-        header('location: ' . URL . 'categorie');
+        header('location: ' . URL . 'service');
     }
 
     public function delete($id) {
@@ -82,18 +94,18 @@ class Service extends Controller {
     }
 
     public function showCategorieList() {
-        $model = new Categorie_Model();
-        print_r($model->showUserList());
+        $model = new Service_Model();
+        print_r($model->showServiceList());
     }
 
     public function showSingleList($id) {
-        $model = new Categorie_Model();
+        $model = new Service_Model();
         print_r($model->showSingleList($id));
     }
 
     public function deleteCategorie($id) {
-        $model = new Categorie_Model();
-        $model->deleteCategorie($id);
+        $model = new Service_Model();
+        $model->deleteService($id);
         print_r($model->showCategorieList());
     }
 

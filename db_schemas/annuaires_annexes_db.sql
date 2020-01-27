@@ -1,57 +1,51 @@
--- MySQL Workbench Forward Engineering
+-- --------------------------------------------------------
+-- Hôte :                        127.0.0.1
+-- Version du serveur:           10.3.16-MariaDB - mariadb.org binary distribution
+-- SE du serveur:                Win64
+-- HeidiSQL Version:             10.3.0.5771
+-- --------------------------------------------------------
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
--- -----------------------------------------------------
--- Schema annuaires-sw
--- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `annuaires-sw` ;
-
--- -----------------------------------------------------
--- Schema annuaires-sw
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `annuaires-sw` DEFAULT CHARACTER SET utf8 ;
-USE `annuaires-sw` ;
-
--- -----------------------------------------------------
--- Table `annuaires-sw`.`categorie`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `annuaires-sw`.`categorie` ;
-
-CREATE TABLE IF NOT EXISTS `annuaires-sw`.`categorie` (
-  `idcategorie` INT NOT NULL AUTO_INCREMENT,
-  `titre` VARCHAR(45) NOT NULL,
-  `description` LONGTEXT NULL,
-  PRIMARY KEY (`idcategorie`))
-ENGINE = InnoDB;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- -----------------------------------------------------
--- Table `annuaires-sw`.`service_referenced`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `annuaires-sw`.`service_referenced` ;
+-- Listage de la structure de la base pour annuaires-sw
+DROP DATABASE IF EXISTS `annuaires-sw`;
+CREATE DATABASE IF NOT EXISTS `annuaires-sw` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `annuaires-sw`;
 
-CREATE TABLE IF NOT EXISTS `annuaires-sw`.`service_referenced` (
-  `idservice_referenced` INT NOT NULL,
-  `denomination` VARCHAR(45) NOT NULL,
-  `contacts` LONGTEXT NOT NULL,
-  `adresse` VARCHAR(100) NOT NULL,
-  `horaire_disponibilite` VARCHAR(45) NOT NULL,
-  `id_ville` INT NOT NULL DEFAULT 1,
-  `details` LONGTEXT NULL,
-  `categorie_idcategorie` INT NOT NULL,
+-- Listage de la structure de la table annuaires-sw. categorie
+DROP TABLE IF EXISTS `categorie`;
+CREATE TABLE IF NOT EXISTS `categorie` (
+  `idcategorie` int(11) NOT NULL AUTO_INCREMENT,
+  `titre` varchar(45) NOT NULL,
+  `description` longtext DEFAULT NULL,
+  PRIMARY KEY (`idcategorie`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- Les données exportées n'étaient pas sélectionnées.
+
+-- Listage de la structure de la table annuaires-sw. servicereferenced
+DROP TABLE IF EXISTS `servicereferenced`;
+CREATE TABLE IF NOT EXISTS `servicereferenced` (
+  `idservice_referenced` int(11) NOT NULL AUTO_INCREMENT,
+  `denomination` varchar(45) NOT NULL,
+  `contacts` longtext NOT NULL,
+  `adresse` varchar(100) NOT NULL,
+  `horairedisponibilite` varchar(45) NOT NULL,
+  `idville` int(11) NOT NULL DEFAULT 1,
+  `details` longtext DEFAULT NULL,
+  `categorie_idcategorie` int(11) NOT NULL,
   PRIMARY KEY (`idservice_referenced`),
-  INDEX `fk_service_referenced_categorie_idx` (`categorie_idcategorie` ASC),
-  CONSTRAINT `fk_service_referenced_categorie`
-    FOREIGN KEY (`categorie_idcategorie`)
-    REFERENCES `annuaires-sw`.`categorie` (`idcategorie`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
+  KEY `fk_service_referenced_categorie_idx` (`categorie_idcategorie`),
+  CONSTRAINT `fk_service_referenced_categorie` FOREIGN KEY (`categorie_idcategorie`) REFERENCES `categorie` (`idcategorie`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
+-- Les données exportées n'étaient pas sélectionnées.
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

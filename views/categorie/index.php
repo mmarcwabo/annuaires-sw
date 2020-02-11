@@ -1,4 +1,7 @@
-<?php   ?>
+<?php
+//Form to add and show categories
+?>
+
 <h2>Ajouter une categorie : </h2>
 <form id="categoryCreationForm" action="<?php echo URL;?>categorie/create" method="post">
 <label for="titre">Titre de la catégorie :</label><br/>

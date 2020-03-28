@@ -4,6 +4,9 @@
   Categorie controller
  */
 
+//namespace "../models";
+//use categorie_model.php;
+
 class Service extends Controller {
 
     function __construct() {
@@ -15,6 +18,9 @@ class Service extends Controller {
 
     function index() {
         $this->view->title = "Service";
+        //Drag attributes to list if needed
+        //and drop them to the view
+        $this->listAttributeOfCategorie("titre");
         $this->view->render("service/index");
     }
 
@@ -93,8 +99,15 @@ class Service extends Controller {
         
     }
 
+    public function listAttributeOfCategorie($attribute) {
+        require_once 'models/categorie_model.php';
+        $model = new Categorie_Model();
+        $this->view->categorieNameList = $model->showAttributeOfCategorieList($attribute);
+    }
+
+
     public function showCategorieList() {
-        $model = new Service_Model();
+        
         print_r($model->showServiceList());
     }
 

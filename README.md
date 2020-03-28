@@ -1,11 +1,20 @@
-# annuaires annexes du sites solidarity world
+# annuaires annexes du sites solidarity world!
 
-Ajouter, Modifier, Supprimerles catégories (Marcellin)
-Ajouter, Modifier, Supprimer les services à referencer (Marcellin)
-Afficher les services selon leur ville/pays (Adama)
+Annuaires annexes du sites solidarity world - affichent les services referencés par pays, region et ville.
+Les informations sur ces services : tarifs, horaire de travail, localisation et intitulé.
 
-#Configurations
- > Dans le fichier config.php
- 		Nom de ma base des données, du host, user et mot de passe
- > Dans le fichier .htaccess
- 		Dossier contenant le projet (après RewriteBase)
+🌟 Application web (PHP et MySQL) 
+
+## Author
+
+**mmarcwabo**
+
+## Fonctionnalités
+
+* Ajouter, Modifier, Supprimerles catégories
+* Ajouter, Modifier, Supprimer les services à referencer
+* Afficher les services selon leur ville/pays
+
+## Configurations
+* Dans le fichier config.php: Nom de ma base des données, du host, user et mot de passe
+* Dans le fichier .htaccess : dossier contenant le projet (après RewriteBase)

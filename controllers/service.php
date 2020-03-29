@@ -37,6 +37,7 @@ class Service extends Controller {
                 ->post('adresse')
                 ->post('horairedisponibilite')
                 ->post('ville')
+                ->post('nouvelleVille')
                 ->post('details')
                 ->post('categorie');
             $form->submit();
@@ -67,7 +68,7 @@ class Service extends Controller {
         //$data = null;
         $form = new Form();
         try {
-            $form->ost('denomination')
+            $form->post('denomination')
                 ->post('telephone')
                 ->post('adressemail')
                 ->post('adresse')
@@ -102,6 +103,8 @@ class Service extends Controller {
     public function listAttributeOfCategorie($attribute) {
         require_once 'models/categorie_model.php';
         $model = new Categorie_Model();
+        $this->view->paysNameList = Model::listItemFromDbTable("pays", "nom");
+        $this->view->villeNameList = Model::listItemFromDbTable("ville", "nom");
         $this->view->categorieNameList = $model->showAttributeOfCategorieList($attribute);
     }
 

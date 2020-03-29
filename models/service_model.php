@@ -1,5 +1,4 @@
 <?php
-
 //user_model
 
 class Service_Model extends Model {
@@ -8,14 +7,45 @@ class Service_Model extends Model {
         parent::__construct();
     }
 
+    /**
+     * showAttributeOfCategorieList - Get lists for comboboxes and select html tags
+     * @param string $attribute the table field we want to list
+     */
     public function create($data) {
         //Inserting data from form in the database
-        $this->db->insert('servicereferenced', ['denomination' => $data['denomination'],
+        //If a new town has been created
+        $nouvelleVille = isset($data['nouvelleVille']) ? $data['nouvelleVille'] : null;
+        if($nouvelleVille!=null){
+            $pays  = $data['nouvelleVille'];
+        }
+
+        print_r($nouvelleVille);
+        return;
+
+
+        $this->db->insert(
+            'servicereferenced',
+            [
+            'denomination' => $data['denomination'],
+            'contacts' => "T : ".($data['telephone']).",E : ".($data['adressemail']),
             'adresse' => $data['adresse'],
             'horairedisponibilite' => $data['horairedisponibilite'],
             'details' => $data['details'],
-            'categorie_idcategorie' => $data['categorie_idcategorie']
+            'idville' => 1,
+            'categorie_idcategorie' => 
+            Model::getFieldFromAnyElse("categorie", "idcategorie", "titre",
+             $data['categorie'])
             ]);
+        //Redirect to the view that sent the request to avoid data duplication on error
+        header('location:'.URL.'/service');
+    }
+
+    /**
+     * showAttributeOfCategorieList - Get lists for comboboxes and select html tags
+     * @param string $attribute the table field we want to list
+     */
+    public function showAttributeOfCategorieList($attribute) {
+        return $this->db->select("SELECT ".$attribute." FROM categorie");
     }
 
     public function showServiceList() {
@@ -31,10 +61,13 @@ class Service_Model extends Model {
      * @param array $data values to save to database
      */
     public function editService($data) {
-        $this->db->update("servicereferenced", ['denomination' => $data['denomination'],
+        $this->db->update("servicereferenced", [
+            'denomination' => $data['denomination'],
+            'contacts' => "T".$data['telephone']."E".$data['adressemail'],
             'adresse' => $data['adresse'],
             'horairedisponibilite' => $data['horairedisponibilite'],
             'details' => $data['details'],
+            'idville' => $data['idville'],
             'categorie_idcategorie' => $data['categorie_idcategorie']]
             , "`idservicereferenced` = {$data['idservicereferenced']}");
     }
@@ -46,9 +79,6 @@ class Service_Model extends Model {
      */
     public function deleteCategorie($id) {
         $result = $this->db->select("SELECT * FROM servicereferenced WHERE idservicereferenced= :id", array(":id" => $id));
-        /*if ($result[0]['roleutilisateur'] == 'Administrateur') {
-            return false;
-        }*/
         $this->db->delete("idservicereferenced", "idservicereferenced= '$id'");
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 #Class name : Categorie
 #Purpose : Categorie controller
 #Author : mwabo
@@ -40,6 +41,8 @@ class Categorie extends Controller {
         //$data['coordonnees_idcordonnees'] = 1;
         //Real insert here    
         $this->model->create($data);
+        //Refresh thecategories' list before render it on the page
+        $this->showCategorieList();
         $this->view->render("categorie/index");
     }
 
@@ -87,6 +90,10 @@ class Categorie extends Controller {
         //Showing all the categories
         //Sending list of categories on the view
         $this->view->listOfCategorie = $this->model->showCategorieList();
+    }
+
+    public function showAttributeOfCategorieList($attribute) {
+        $this->view->categorieNameList = $this->model->showAttributeOfCategorieList($attribute);
     }
 
     public function showSingleList($id) {

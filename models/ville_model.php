@@ -10,13 +10,22 @@ class Categorie_Model extends Model {
 
     public function create($data) {
         //Inserting data from form in the database
-        $this->db->insert('categorie', ['titre' => $data['titre'],
-            'description' => $data['description']
+        $this->db->insert('ville', ['nom' => $data['nom'],
+            'pays_idpays' => 
+            Model::getFieldFromAnyElse("ville", "idville", "nom",
+            $data['pays']),
+            'latitude' => $data['latitude'],
+            'longitude' => $data['longitude']
             ]);
     }
 
-    public function showCategorieList() {
-        return $this->db->select("SELECT * FROM categorie");
+    public function getVilleOfAPays($paysName) {
+        return $this->db->select("SELECT nom FROM ville pays_idpays = :idpays", array(":idpays" =>
+            Model::getFieldFromAnyElse("pays", "idpays", "nom", $paysName)));
+    }
+
+    public function showVilleList() {
+        return $this->db->select("SELECT * FROM ville");
     }
 
     /**

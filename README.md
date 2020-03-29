@@ -5,7 +5,7 @@ Les informations sur ces services : tarifs, horaire de travail, localisation et 
 
 🌟 Application web (PHP et MySQL) 
 
-## Author
+## Auteur
 
 **mmarcwabo**
 

@@ -1,3 +1,2 @@
-$(document).ready(function(){
-    alert(1);
-});
+//Globals
+var appAbsolutePath  = "http://localhost/annuaires-sw/";

@@ -16,9 +16,13 @@ class Ville extends Controller {
 
     function index() {
         $this->view->title = "Ville";
-        $this->view->js = array("scripts/js/categorie.js");
-        //Display categories' list before render it on the page
-        $this->showCategorieList();
+        //Javascript files for ajax calls
+        $this->view->js = array(
+            "scripts/js/main.js",
+            "scripts/js/ville.js"
+        );
+        //Display villes' list before render it on the page
+        //$this->showVilleList();
         $this->view->render("ville/index");
     }
 
@@ -31,7 +35,7 @@ class Ville extends Controller {
         try {
             $form->post('nom')
                 ->post('pays_idpays')
-                ->post('latitude');
+                ->post('latitude')
                 ->post('longitude');
             $form->submit();
             //echo "the form passed";
@@ -48,9 +52,15 @@ class Ville extends Controller {
         $this->view->render("ville/index");
     }
 
-    public function getVille($paysName){
-
-        $this->model->getVilleOfAPays($paysName);
+    /**
+     * getVilleOfAPays - refresh as option to a select of the selected ville
+     * @param string $paysName : the pays we want to display towns
+     *
+     * @return display the towns as options
+     */
+    public function getVilleOfAPays($paysName){
+        //Adding only town
+        echo @Utils::arrayToList($this->model->getVilleOfAPays($paysName));
 
     }
 

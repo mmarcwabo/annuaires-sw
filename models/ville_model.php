@@ -1,8 +1,8 @@
 <?php
 
-//categorie_model
+//Ville
 
-class Categorie_Model extends Model {
+class Ville_Model extends Model {
 
     function __construct() {
         parent::__construct();
@@ -20,7 +20,7 @@ class Categorie_Model extends Model {
     }
 
     public function getVilleOfAPays($paysName) {
-        return $this->db->select("SELECT nom FROM ville pays_idpays = :idpays", array(":idpays" =>
+        return $this->db->select("SELECT nom FROM ville WHERE pays_idpays = :idpays", array(":idpays" =>
             Model::getFieldFromAnyElse("pays", "idpays", "nom", $paysName)));
     }
 

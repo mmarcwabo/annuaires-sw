@@ -24,7 +24,20 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `titre` varchar(45) NOT NULL,
   `description` longtext DEFAULT NULL,
   PRIMARY KEY (`idcategorie`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- Les données exportées n'étaient pas sélectionnées.
+
+-- Listage de la structure de la table annuaires-sw. pays
+DROP TABLE IF EXISTS `pays`;
+CREATE TABLE IF NOT EXISTS `pays` (
+  `idpays` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `nom` varchar(255) NOT NULL,
+  `code` varchar(10) NOT NULL,
+  `francophone` varchar(10) NOT NULL DEFAULT 'oui',
+  PRIMARY KEY (`idpays`),
+  UNIQUE KEY `name` (`nom`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -42,7 +55,21 @@ CREATE TABLE IF NOT EXISTS `servicereferenced` (
   PRIMARY KEY (`idservice_referenced`),
   KEY `fk_service_referenced_categorie_idx` (`categorie_idcategorie`),
   CONSTRAINT `fk_service_referenced_categorie` FOREIGN KEY (`categorie_idcategorie`) REFERENCES `categorie` (`idcategorie`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+-- Les données exportées n'étaient pas sélectionnées.
+
+-- Listage de la structure de la table annuaires-sw. ville
+DROP TABLE IF EXISTS `ville`;
+CREATE TABLE IF NOT EXISTS `ville` (
+  `idville` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nom` varchar(255) NOT NULL,
+  `pays_idpays` smallint(5) unsigned NOT NULL,
+  `latitude` decimal(10,8) NOT NULL,
+  `longitude` decimal(11,8) NOT NULL,
+  PRIMARY KEY (`idville`),
+  KEY `country_region_name` (`pays_idpays`,`nom`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- Les données exportées n'étaient pas sélectionnées.
 

@@ -1,11 +1,9 @@
 <?php
 
-/*
-  Categorie controller
- */
-
-//namespace "../models";
-//use categorie_model.php;
+#Class name : Service
+#Purpose : Service controller
+#Author : mwabo
+#email : mwabo@exsofth.com
 
 class Service extends Controller {
 
@@ -13,7 +11,11 @@ class Service extends Controller {
         parent::__construct();
         //Model instantiation
         //JS files for this controller
-        //$this->view->js = array("scripts/js/user.js");
+        $this->view->js = array(
+            "scripts/js/main.js",
+            "scripts/js/service.js",
+            "scripts/js/ville.js",
+        );
     }
 
     function index() {
@@ -36,6 +38,7 @@ class Service extends Controller {
                 ->post('adressemail')
                 ->post('adresse')
                 ->post('horairedisponibilite')
+                ->post('pays')
                 ->post('ville')
                 ->post('nouvelleVille')
                 ->post('details')
@@ -104,6 +107,7 @@ class Service extends Controller {
         require_once 'models/categorie_model.php';
         $model = new Categorie_Model();
         $this->view->paysNameList = Model::listItemFromDbTable("pays", "nom");
+        $this->view->paysIdFromVilleList = Model::listItemFromDbTable("ville", "pays_idpays");
         $this->view->villeNameList = Model::listItemFromDbTable("ville", "nom");
         $this->view->categorieNameList = $model->showAttributeOfCategorieList($attribute);
     }

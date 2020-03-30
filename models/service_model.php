@@ -15,26 +15,37 @@ class Service_Model extends Model {
         //Inserting data from form in the database
         //If a new town has been created
         $nouvelleVille = isset($data['nouvelleVille']) ? $data['nouvelleVille'] : null;
+        $pays = "";
+        $idVille = 0;
         if($nouvelleVille!=null){
-            $pays  = $data['nouvelleVille'];
+            $pays = $data['pays'];
+            //Let's write the new town to database
+            //Cordinates gotta be gotten from leaflet or google map API
+            $this->db->insert('ville',
+                [
+                    'nom'=> $nouvelleVille,
+                    'pays_idpays'=> 
+                     Model::getFieldFromAnyElse("pays", "idpays", "nom",
+                     $pays),
+                    'latitude'=> -4.40129060,
+                    'longitude'=> 15.18265780          
+                ]);
+        //Getting the lastly inserted town id, to the service writting to database
+        $idVille = Model::getFieldFromAnyElse("ville", "idville", "nom", $nouvelleVille);    
         }
+        
 
-        print_r($nouvelleVille);
-        return;
-
-
-        $this->db->insert(
-            'servicereferenced',
+        $this->db->insert('servicereferenced',
             [
-            'denomination' => $data['denomination'],
-            'contacts' => "T : ".($data['telephone']).",E : ".($data['adressemail']),
-            'adresse' => $data['adresse'],
-            'horairedisponibilite' => $data['horairedisponibilite'],
-            'details' => $data['details'],
-            'idville' => 1,
-            'categorie_idcategorie' => 
-            Model::getFieldFromAnyElse("categorie", "idcategorie", "titre",
-             $data['categorie'])
+                'denomination' => $data['denomination'],
+                'contacts' => "T : ".($data['telephone']).",E : ".($data['adressemail']),
+                'adresse' => $data['adresse'],
+                'horairedisponibilite' => $data['horairedisponibilite'],
+                'details' => $data['details'],
+                'idville' => $idVille,
+                'categorie_idcategorie' => 
+                 Model::getFieldFromAnyElse("categorie", "idcategorie", "titre",
+                 $data['categorie'])
             ]);
         //Redirect to the view that sent the request to avoid data duplication on error
         header('location:'.URL.'/service');

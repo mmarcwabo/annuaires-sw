@@ -21,6 +21,8 @@ class Service_Model extends Model {
             $pays = $data['pays'];
             //Let's write the new town to database
             //Cordinates gotta be gotten from leaflet or google map API
+            //Check for duplicate
+            //if(!(Model::doesKeyExist($tableName, $field, $keyValue)){}
             $this->db->insert('ville',
                 [
                     'nom'=> $nouvelleVille,
@@ -48,7 +50,7 @@ class Service_Model extends Model {
                  $data['categorie'])
             ]);
         //Redirect to the view that sent the request to avoid data duplication on error
-        header('location:'.URL.'/service');
+        header('location:'.URL.'service');
     }
 
     /**

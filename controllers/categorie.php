@@ -16,7 +16,10 @@ class Categorie extends Controller {
 
     function index() {
         $this->view->title = "Categorie";
-        $this->view->js = array("scripts/js/categorie.js");
+        $this->view->js = array(
+            "scripts/js/main.js",
+            "scripts/js/categorie.js"
+        );
         //Display categories' list before render it on the page
         $this->showCategorieList();
         $this->view->render("categorie/index");
@@ -37,11 +40,9 @@ class Categorie extends Controller {
         } catch (Exception $exc) {
             echo $exc->getMessage();
         }
-        //Getting the user id here
-        //$data['coordonnees_idcordonnees'] = 1;
         //Real insert here    
         $this->model->create($data);
-        //Refresh thecategories' list before render it on the page
+        //Refresh the categories' list before render it on the page
         $this->showCategorieList();
         $this->view->render("categorie/index");
     }
@@ -106,5 +107,4 @@ class Categorie extends Controller {
         $model->deleteCategorie($id);
         print_r($model->showCategorieList());
     }
-
 }

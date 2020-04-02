@@ -1,17 +1,76 @@
 /*
 Design 
 */
+html,
+body
+{
+	margin: 0;
+	padding: 0;
+}
+body
+{
+	background: #fff;
+	border-top: solid 12px #0a6fa5;
+	font-family: 'Rubik', sans-serif
+	font-size: 15px;
+	line-height: 20px;
+	margin: 0;
 
-body{
-   background: silver;
-   font-family: 'Roboto', sans-serif;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+}
+a
+{
+	color: inherit;
+}
+dl:after
+{
+	content: '';
+	display: block;
+	clear: both;
+}
+dt, dd
+{
+	display: block;
+	padding: 10px 0;
+	margin: 0;
+	float: left;
+}
+dt
+{
+	width: 30%;
+	clear: left;
+}
+dd
+{
+	width: 70%;
+}
+dd + dt,
+dd + dt + dd
+{
+	border-top: 1px solid #ccc;
+}
 
+table
+{
+	width: 90%;
+}
+td
+{
+	border-bottom: 1px solid #ccc;
+	padding: 10px 0;
+	text-align: left;
+	vertical-align: top;
 }
 
 #header{
     padding: 20px;
-    background: darkorange;
+    background: #333;
+    max-width:100%;
 
+}
+#header h2 {
+	color:white;
 }
 
 #content{
@@ -22,4 +81,8 @@ body{
 #footer{
     background: seagreen;
     padding: 20px;
+}
+
+#hidden_option{
+	display : none;
 }

@@ -39,7 +39,7 @@ class Model {
      * @param string $field : the field we want to check name
      * @param string $keyValue : the key value
      *
-     * @return int 0 if the key doesn't exist and the count of the fields found with that key
+     * @return $itemExists boolean true if the key doesn't exist and the count of the fields found with that key
      */
 
 	public static function doesKeyExist($tableName, $field, $keyValue) {
@@ -53,7 +53,10 @@ class Model {
     $preparedQuery->execute(array($keyValue));
     $count = $preparedQuery->rowCount();
     $preparedQuery->closeCursor();
-    return $count;
+
+    $itemExists =  ($count > 0) ? true : false;
+
+    return $itemExists;
 	}
 
 	/**

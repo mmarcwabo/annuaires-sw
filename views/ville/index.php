@@ -1,5 +1,5 @@
 <?php   ?>
-<h2>Ajouter une categorie : </h2>
+<h2>Ville : </h2>
 <form id="categoryCreationForm" action="<?php echo URL;?>categorie/create" method="post">
 <label for="titre">Titre de la catégorie :</label><br/>
 <input type="text" name="titre" id="titre"><br/>

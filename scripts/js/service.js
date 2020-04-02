@@ -1,0 +1,1 @@
+//JS Functions for ajax calls

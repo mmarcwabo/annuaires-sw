@@ -13,6 +13,8 @@ class Categorie_Model extends Model {
         $this->db->insert('categorie', ['titre' => $data['titre'],
             'description' => $data['description']
             ]);
+        //Redirect to the view that sent the request to avoid data duplication on error
+        header('location:'.URL.'categorie');
     }
 
     public function showCategorieList() {

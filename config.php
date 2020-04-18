@@ -1,7 +1,7 @@
 <?php
 
 //App TITLE
-define('TITLE', 'Annuaires annexes'); 
+define('TITLE', 'Annuaires annexes solidarity world'); 
 //App URL
 //Always provide a trailing slash (/) after a path
 define('URL', 'http://localhost/annuaires-sw/');
